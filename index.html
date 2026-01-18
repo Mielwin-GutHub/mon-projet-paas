@@ -1,13 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Application PaaS</title>
+    <title>Démo PaaS - Render</title>
+    <style>
+        /* Variables de couleurs */
+        :root {
+            --primary-color: #4338ca;
+            --accent-color: #06b6d4;
+            --text-dark: #1e293b;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Carte principale */
+        .container {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 8px solid var(--primary-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #64748b;
+        }
+
+        /* Liste des membres */
+        .team-section {
+            text-align: left;
+            background: #f1f5f9;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .team-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        li::before {
+            content: "Ø";
+            color: var(--accent-color);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .leader {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Animation Simple JS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 100px;">
-    <h1>Démonstration PaaS réussie !</h1>
-    <p>Cette application est hébergée sur la plateforme <strong>Render</strong>.</p>
-    <p>Le serveur et l'infrastructure sont gérés automatiquement par le fournisseur.</p>
+<body>
+
+    <div class="container fade-in" id="mainCard">
+        <div class="status-badge">Propulsé par Render</div>
+        <h1>Démonstration PaaS réussie !</h1>
+        
+        <p class="description">
+            Cette application est hébergée sur la plateforme <strong>Render</strong>.<br>
+            Le serveur et l'infrastructure sont gérés automatiquement par le fournisseur.
+        </p>
+
+        <div class="team-section">
+            <h2>Membres du groupe</h2>
+            <ul>
+                <li class="leader">KAMGUIA MELWIN (Chef de Groupe)</li>
+                <li>MEKONDANE ALBERT II</li>
+                <li>MOUGNOL BELIBENE</li>
+                <li>NABILATOU SALI</li>
+                <li>NJOUME KOULLE</li>
+                <li>N'DONTSOP MAKENE</li>
+                <li>KEUNI MBIAKOUP</li>
+                <li>NGOUMENE FOKOU FORTUNE</li>
+                <li>NJINKOUE YOAN</li>
+                <li>NGUEFACK TSAFACK</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Petit script pour l'animation d'entrée
+        window.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('mainCard');
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, 100);
+        });
+    </script>
 </body>
 </html>
