@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Démo PaaS - Render</title>
+    <title>IAI-Cameroun | Démo PaaS Render</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables de couleurs */
         :root {
-            --primary-color: #4338ca;
-            --accent-color: #06b6d4;
-            --text-dark: #1e293b;
-            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --iai-blue: #0f172a;
+            --accent-blue: #3b82f6;
+            --render-teal: #00e5d1;
+            --glass: rgba(255, 255, 255, 0.95);
         }
 
-        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -21,9 +20,9 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -31,119 +30,183 @@
             padding: 20px;
         }
 
-        /* Carte principale */
-        .container {
-            background: white;
-            max-width: 600px;
+        .main-card {
+            background: var(--glass);
+            color: var(--iai-blue);
+            max-width: 700px;
             width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* En-tête avec dégradé */
+        .header-bar {
+            background: linear-gradient(90deg, var(--accent-blue), var(--render-teal));
+            height: 8px;
+            width: 100%;
+        }
+
+        .content {
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            border-top: 8px solid var(--primary-color);
         }
 
-        h1 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .status-badge {
+        .badge-paas {
             display: inline-block;
-            background: #dcfce7;
-            color: #166534;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 20px;
         }
 
-        .description {
-            line-height: 1.6;
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .host-info {
+            font-size: 1.1rem;
+            color: #475569;
             margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .host-info strong {
+            color: #3b82f6;
+        }
+
+        /* Section Infos Étudiant & Examinateur */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-box h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
             color: #64748b;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
         }
 
-        /* Liste des membres */
-        .team-section {
-            text-align: left;
-            background: #f1f5f9;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        .team-section h2 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 5px;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li {
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-        }
-
-        li::before {
-            content: "Ø";
-            color: var(--accent-color);
-            margin-right: 12px;
-            font-weight: bold;
-        }
-
-        .leader {
-            color: var(--primary-color);
+        .name {
+            font-size: 1.1rem;
             font-weight: 700;
+            color: #0f172a;
         }
 
-        /* Animation Simple JS */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
+        .detail {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 4px;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Interaction Bouton */
+        .btn-status {
+            margin-top: 25px;
+            padding: 12px 24px;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-status:hover {
+            background: #3b82f6;
+            transform: scale(1.02);
         }
     </style>
 </head>
 <body>
 
-    <div class="container fade-in" id="mainCard">
-        <div class="status-badge">Propulsé par Render</div>
-        <h1>Démonstration PaaS réussie !</h1>
+    <div class="main-card">
+        <div class="header-bar"></div>
         
-        <p class="description">
-            Cette application est hébergée sur la plateforme <strong>Render</strong>.<br>
-            Le serveur et l'infrastructure sont gérés automatiquement par le fournisseur.
-        </p>
+        <div class="content">
+            <div class="badge-paas">Projet Cloud Computing</div>
+            
+            <h1>Démonstration PaaS réussie !</h1>
+            
+            <p class="host-info">
+                Cette application est hébergée sur la plateforme <strong>Render</strong>.<br>
+                Le serveur et l'infrastructure sont gérés automatiquement par le fournisseur.
+            </p>
 
-        <div class="team-section">
-            <h2>Réalisé par: </h2>
-            <ul>
-                <li class="leader">KAMGUIA MELWIN, étudiant à l'IAI-Cameroun, filière Génie Logiciel Niveau 2</li>
-            </ul>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>Présenté par</h3>
+                    <div class="name">KAMGUIA MELWIN</div>
+                    <div class="detail">IAI-Cameroun</div>
+                    <div class="detail">Génie Logiciel - Niveau 2</div>
+                </div>
+
+                <div class="info-box" style="border-left: 4px solid var(--accent-blue);">
+                    <h3>Examinateur</h3>
+                    <div class="name">M. ELLA</div>
+                    <div class="detail">Évaluation d'exposé</div>
+                    <div class="detail">Session 2026</div>
+                </div>
+            </div>
+
+            <button class="btn-status" onclick="checkStatus()">Vérifier l'état du serveur</button>
+
+            <footer>
+                © 2026 - Institut Africain d'Informatique - Travaux Pratiques Cloud
+            </footer>
         </div>
     </div>
 
     <script>
-        // Petit script pour l'animation d'entrée
-        window.addEventListener('DOMContentLoaded', () => {
-            const card = document.getElementById('mainCard');
+        function checkStatus() {
+            const btn = document.querySelector('.btn-status');
+            btn.textContent = "⏳ Vérification...";
+            
             setTimeout(() => {
-                card.classList.add('visible');
-            }, 100);
-        });
+                btn.style.background = "#22c55e";
+                btn.textContent = "✓ Serveur Opérationnel sur Render";
+            }, 1500);
+        }
     </script>
 </body>
 </html>
